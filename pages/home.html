@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airport Banner Section</title>
+    <style>
+      .left-img {
+        height: 80vh; /* full screen height */
+      }
+
+      .left-img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover; /* or contain if you don't want cropping */
+      }
+    </style>
+    <style>
+      .logo-carousel-container {
+        overflow: hidden;
+        background: #fff;
+        padding: 20px 0;
+      }
+
+      .logo-carousel-track {
+        display: flex;
+        width: max-content;
+        animation: scrollLeft 30s linear infinite;
+        
+      }
+
+      .logo-carousel-group {
+        display: flex;
+      }
+
+      .logo-carousel-group img {
+        height: 60px;
+        width: auto;
+        margin: 0 40px;
+        object-fit: contain;
+      }
+
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .logo-carousel-group img {
+          height: 40px;
+          margin: 0 20px;
+        }
+      }
+    </style>
+    
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+      }
+
+      .updates-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        justify-content: center;
+      }
+
+      .left-img,
+      .info-box,
+      .quick-links {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .left-img {
+        flex: 1 1 200px;
+        max-width: 250px;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .left-img img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .info-box {
+        flex: 2 1 500px;
+        /* max-width: 700px; */
+        padding: 15px;
+        position: relative;
+        overflow: hidden;
+        height: 300px;
+      }
+
+      .info-header {
+        background: #0072c6;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .info-content {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        animation: scrollUp 20s linear infinite;
+      }
+
+      @keyframes scrollUp {
+        0% {
+          transform: translateY(100%);
+        }
+        100% {
+          transform: translateY(5%);
+        }
+      }
+
+      .info-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        background: #fff;
+      }
+
+      .quick-links {
+        flex: 1 1 200px;
+        max-width: 250px;
+        padding: 10px;
+      }
+
+      .quick-links h4 {
+        text-align: center;
+        color: #f58220;
+      }
+
+      .quick-links ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .quick-links ul li {
+        border-bottom: 1px solid #ddd;
+        padding: 8px 5px;
+      }
+
+      .quick-links ul li a {
+        text-decoration: none;
+        color: #0072c6;
+      }
+
+      @media (max-width: 768px) {
+        .info-box {
+          max-width: 100%;
+          height: 200px;
+        }
+      }
+    </style>
+    <style>
+                * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+                }
+
+                .video-wrapper {
+                  margin-top : 0;
+                  position: relative;
+                  width: 100%;
+                  height: auto;
+                  overflow: hidden;
+                }
+
+                .video-wrapper video {
+                  width: 100%;
+                  height: 27rem;
+                  object-fit: cover;
+                }
+
+                .banner-section {
+        background: linear-gradient(to right, #29abe2, #00c6ff);
+      }
+
+      /* .banner-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 25px 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        width :100%
+      } */
+
+      .banner-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  max-width: 400px;     /* wider */
+  margin: 0 auto;        /* center align if needed */
+  width: 100%;
+}
+
+      .banner-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .banner-card img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+      }
+
+      .banner-card h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .banner-card a {
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .banner-card a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 576px) {
+        .banner-card {
+          padding: 20px 10px;
+        }
+        .banner-card h5 {
+          font-size: 15px;
+        }
+      }
+
+                @media (max-width: 768px) {
+              .profile, .notification, .video {
+                width: 100%;
+                margin-bottom: 20px;
+              }
+            }
+    </style>
+  </head>
+  <body>
+    <!-- Background Video -->
+    <div class="video-wrapper">
+      <video
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+    </div>
+
+    <!-- Banner Below Video -->
+    <section style="background-color: #0B6A9D;" class="pt-5 pb-5">
+
+    <div class="container">
+      <div class="row g-4 justify-content-center text-white">
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="fancy-card h-100 text-center">
+            <div class="icon-box bg-primary">
+              <i class="fas fa-id-card"></i>
+            </div>
+            <h5>Admit Card</h5>
+            <a href="#">Download</a>
+          </div>
+        </div>
+  
+        <div class="col-md-3 col-sm-6">
+          <div class="fancy-card h-100 text-center">
+            <div class="icon-box bg-success">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h5>Result Available</h5>
+            <a href="#">Download</a>
+          </div>
+        </div>
+  
+        <div class="col-md-3 col-sm-6">
+          <div class="fancy-card h-100 text-center">
+            <div class="icon-box bg-warning">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h5>Call Letter</h5>
+            <a href="#">Check Now</a>
+          </div>
+        </div>
+  
+        <div class="col-md-3 col-sm-6">
+          <div class="fancy-card h-100 text-center">
+            <div class="icon-box bg-danger">
+              <i class="fas fa-file-signature"></i>
+            </div>
+            <h5>Joining Letter</h5>
+            <a href="#">Check Now</a>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+  <div class="container-fluid bg-light py-3 border-bottom shadow-sm">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center px-3">
+    
+    <!-- Left Button -->
+    <button class="btn btn-outline-primary fw-semibold px-4 py-2 shadow-sm mb-3 mb-md-0">
+      🛡 OUR DEFENSE POLICY - 2024–25
+    </button>
+
+    <!-- Center Title -->
+    <div class="text-center mb-3 mb-md-0">
+      <h4 class="fw-bold text-uppercase text-dark mb-0">Welcome to</h4>
+      <small class="text-muted">Serving the Nation with Pride</small>
+    </div>
+
+    <!-- Right Badge / Image -->
+    <div>
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeaKlW3wCKe8GkpqAltOajhEUadZwAujwJ4Q&s"
+        alt="India Emblem"
+        style="height: 60px;"
+        class="img-fluid"
+      />
+    </div>
+    
+  </div>
+</div>
+
+
+    <div class="py-4">
+      <div class="row text-center justify-content-center g-4">
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/charkha.png"
+            class="img-fluid"
+            alt="Logo 1"
+          />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/sbharat.png"
+            class="img-fluid"
+            alt="Logo 2"
+          />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/swach.png"
+            class="img-fluid"
+            alt="Logo 3"
+          />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/75amrit.png"
+            class="img-fluid"
+            alt="Logo 4"
+          />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/india.png"
+            class="img-fluid"
+            alt="Logo 4"
+          />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <img
+            src="https://www.niaaviationservices.com/assets/img/homepage/digi.png"
+            class="img-fluid"
+            alt="Logo 5"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div style="background-color : #0B6A9D" class="py-4 ">
+      <div class="row p-3 g-3">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+          <div class="p-3 border rounded bg-light">
+            <h5>Profile</h5>
+            <p>
+              <strong>Customer Service Associate (CSA)</strong>
+              <span class="badge bg-info text-dark">New</span>
+            </p>
+            <button class="btn btn-danger">APPLY NOW</button>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+        <div class="p-3 border rounded bg-light">
+          <h5>Profile</h5>
+          <p>
+            <strong>Customer Service Associate (CSA)</strong>
+            <span class="badge bg-info text-dark">New</span>
+          </p>
+          <button class="btn btn-danger">APPLY NOW</button>
+        </div>
+      </div>
+        <!-- Notification Card -->
+        <div class="col-md-5">
+          <div class="p-3 border rounded bg-light">
+            <h5 class="fw-bold">
+              Notification Download Available in Hindi / English
+            </h5>
+            <ul class="list-unstyled mt-3">
+              <li>
+                <i class="bi bi-file-earmark-pdf-fill text-danger"></i> NIA
+                Aviation Services Notification Hindi 2025
+              </li>
+              <li>
+                <i class="bi bi-file-earmark-pdf-fill text-danger"></i> NIA
+                Aviation Services Notification English 2025
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Video Section -->
+        
+      </div>
+    </div>
+
+    <section class="updates-section col-12">
+      <!-- Left Image -->
+      <!-- <div class="left-img col-3">
+        <img
+          src="https://www.niaaviationservices.com/assets/img/airportsmap.png"
+          alt="India Map"
+        />
+      </div> -->
+
+      <!-- Info Box -->
+      <div class="col-10">
+        <div class="info-box">
+          <div class="info-header">INFORMATION</div>
+          <div class="info-content" id="infoLoop">
+            <div class="info-item">
+              1. Candidates must read the notification carefully before
+              applying.
+            </div>
+            <div class="info-item">
+              2. Apply only through the official website:
+              www.niaaviationservices.com
+            </div>
+            <div class="info-item">3. Helpline: 99-908090-56, 76, 44</div>
+            <div class="info-item">
+              4. Hindi: उम्मीदवारों से अनुरोध है कि फॉर्म अप्लाई करने से पहले
+              सूचना पढ़ें।
+            </div>
+            <div class="info-item">
+              5. Scroll is infinite loop with bottom to top animation.
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="container-fluid px-0">
+            <img
+              src="https://www.niaaviationservices.com/assets/img/airindiavcc.jpg"
+              class="img-fluid w-100"
+              alt="Responsive Image"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="quick-links col-3">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li><a href="#">Apply Now</a></li>
+          <li><a href="#">Admit Card (Not Available)</a></li>
+          <li><a href="#">Result (Not Available)</a></li>
+          <li><a href="#">Become Ground Staff</a></li>
+          <li><a href="#">Wheel Chair Staff</a></li>
+          <li><a href="#">Training Overview</a></li>
+          <li><a href="#">Professional Overview</a></li>
+          <li>
+            <a href="#">Aviation After 12<sup>th</sup></a>
+          </li>
+          <li><a href="#">Airport Retail</a></li>
+          <li><a href="#">Airport Services</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="logo-carousel-container">
+      <div class="logo-carousel-track">
+        <div class="logo-carousel-group">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logo_2013_Google.png/320px-Logo_2013_Google.png"
+            alt="Google"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmdVpvbhF1BxdR3kZw0C-7RRdp1Bf-nfJMKg&s"
+            alt="Microsoft"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+            alt="Apple"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBNXBk_D2np3zZ2v4oDPEQ2FPRv3nlzRpo7Q&s"
+            alt="Meta"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsDGJ8SkeSH6kxEDDxPYFTH91eE0eENsQ3Lg&s"
+            alt="Twitter"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+            alt="Facebook"
+          />
+        </div>
+        <!-- Duplicate for infinite loop -->
+        <div class="logo-carousel-group">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logo_2013_Google.png/320px-Logo_2013_Google.png"
+            alt="Google"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ZWTG0H0_MkCT_5Js99ep-YDxukJyCgbJoQ&s"
+            alt="Microsoft"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+            alt="Apple"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqGh3kkSlm4Eja-KPrjsSlihaFhyxxo36QzA&s"
+            alt="Meta"
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPmKPDPfEhdqMRMXU6HEMHo2LjFJ5s5eBrbQ&s"
+            alt="Twitter"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+            alt="Facebook"
+          />
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

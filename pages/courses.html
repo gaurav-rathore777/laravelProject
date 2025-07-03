@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  .gard {
+  position: relative;
+  width: 190px;
+  height: 254px;
+  background-color: #003d66;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.gard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  margin: auto;
+  width: 200px;
+  height: 264px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gard::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+}
+
+.heading {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.gard p:not(.heading) {
+  font-size: 14px;
+}
+
+.gard p:last-child {
+  color: #e81cff;
+  font-weight: 600;
+}
+
+.gard:hover::after {
+  filter: blur(30px);
+}
+
+.gard:hover::before {
+  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+}
+
+
+  </style>
+  
+</head>
+<body>
+
+<section class="bg-image text-white d-flex align-items-center" style="
+background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6BOzGAMWPEDumTO_w1ov0GO8sSQZSyoctYQ&s');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+min-height: 500px;
+">
+<div class="container text-center">
+  <h1 class="display-4">Welcome to NIA Aviation Services</h1>
+  <p class="lead">We prepare you for a successful future in aviation, hospitality, and more.</p>
+</div>
+</section>
+<section class="pt-3 pb-3" >
+  <div class="container">
+    <div class="text-center mt-5 mb-5">
+      <h1 class="align-item-center">this is our course</h1>
+    </div>
+  <div class=" d-flex justify-content-center align-items-center gap-5">
+
+  <div class="gard">
+  <p class="heading">
+    Popular this month
+  </p>
+  <p>
+    Powered By
+  </p>
+  <p>kliff tech
+  </p></div>
+  <div class="gard">
+  <p class="heading">
+    Popular this month
+  </p>
+  <p>
+    Powered By
+  </p>
+  <p>kliff tech
+  </p></div>
+  <div class="gard">
+  <p class="heading">
+    Popular this month
+  </p>
+  <p>
+    Powered By
+  </p>
+  <p>kliff tech
+  </p></div>
+  <div class="gard">
+  <p class="heading">
+    Popular this month
+  </p>
+  <p>
+    Powered By
+  </p>
+  <p>kliff tech
+  </p></div>
+  </div>
+  </div>
+</section>
+
+<section class="container py-5">
+<div class="row align-items-start g-4">
+  <!-- Left Column: Images -->
+  <div class="col-md-4 ">
+    <!-- <div class="mb-3">
+      <img src="https://img.freepik.com/free-photo/man-wearing-safety-vest-using-walkie-talkie-airport_23-2151004239.jpg" class="img-fluid rounded" alt="Airport Worker">
+    </div> -->
+    <div class="mt-2">
+      <img src="https://img.freepik.com/free-photo/airport-staff-checking-passport-passenger_23-2149270833.jpg" class="img-fluid rounded" alt="Airport Staff">
+    </div>
+  </div>
+
+  <!-- Right Column: Text -->
+  <div class="col-md-8">
+    <h3 class="mb-4">Career at airport</h3>
+
+    <p>
+      NIA Aviation Services Pvt.Ltd. believes that its most valuable asset is the experience it gains from its candidates, so as an organisation, it promotes the success and progress of its applicants. The secret to our effectiveness is supporting investment, collaboration, activity, innovation, and profitability of our assets.
+    </p>
+
+    <p class="mt-4">
+      NIA Aviation Services Pvt.Ltd. wants to work with its applicants in the long run. It believes that each person who supports it is a unique representative of the organisation as a whole. Hence, it anticipates that the majority of its professors will take part in sharing gathering solidarity while upholding the law and demonstrating that consistency is maintained in both their behaviour and the performance of their duties.
+    </p>
+  </div>
+</div>
+</section>
+
+<section class="container py-5">
+<div class="row align-items-start g-4">
+  <!-- Left Column: Text -->
+  <div class="col-md-8">
+    <h3 class="mb-4">Manpower Services</h3>
+    <p>
+      NIA Aviation Services Pvt.Ltd. has significant roots in aviation, hospitality, travel & tourism, retail, event management, and other areas of the tourism industry. At various airports in India and overseas, it has engaged more than 6000 candidates to do ground handling tasks for both domestic and foreign airlines. To meet the demands of new clients in many industries, NIA Aviation Services Pvt.Ltd. alone needs a sizable workforce.
+    </p>
+    <p class="mt-4">
+      NIA Aviation Services Pvt.Ltd. typically requires 100 professionals in ground staff on a regular basis. Airlines automatically contact NIA Aviation Services Pvt.Ltd. for their Ground Crew requirements before making this information public as a natural result of NIA Aviation Services Pvt.Ltd.’s good relationships with aviation industry stakeholders. As a result, NIA Aviation Services Pvt.Ltd. is frequently the first to learn about these coveted openings.
+    </p>
+  </div>
+
+  <!-- Right Column: Images -->
+  <div class="col-md-4">
+    <!-- <div class="mb-3">
+      <img src="https://img.freepik.com/free-photo/group-airport-workers-walking-runway_23-2149872174.jpg" class="img-fluid rounded" alt="Airport Workers">
+    </div> -->
+    <div>
+      <img src="https://img.freepik.com/free-photo/woman-helping-customer-check-airport-counter_23-2149282863.jpg" class="img-fluid rounded" alt="Airport Staff Assistance">
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+  
+</body>
+</html>

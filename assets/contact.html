@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+<div class="text-center mt-4">
+  <a href="#contact-form" class="contact-btn">Contact Us</a>
+</div>
+<div class="contact-poster">
+  <!-- Inner Poster Top: Numbers + Email -->
+  <div class="contact-inner-top">
+    <div class="contact-numbers">
+      <a href="tel:919990809076"> +91 999-080-9224</a>
+      <a href="tel:919990809075"> +91 999-080-9223</a>
+      <div class="additional-numbers">
+        (+91 999-080-9076, +91 999-080-9056, +91 999-080-9944)
+      </div>
+    </div>
+
+    <div class="contact-email">
+      <a href="mailto:info@niaaviationservices.com">📧 info@niaaviationservices.com</a>
+    </div>
+  </div>
+
+  <!-- Inner Poster Bottom: Addresses -->
+  <div class="contact-inner-bottom">
+    <div class="office">
+      <strong>📍 Operational Office:</strong><br>
+      B3, 3rd Floor, Dwarka Mor, Nawada Housing Complex, Delhi 110078
+    </div>
+    <div class="office">
+      <strong>📍 Head Office:</strong><br>
+      Office No-1156, 11th Floor, Gaur City Mall, Sector 04, Noida, UP 201301
+    </div>
+  </div>
+</div>
+
+
+<div class="contact-detail-down-div">
+        <form method="POST" action="contact-submit">
+            <input type="hidden" name="_token" value>
+
+            <div class="contact-details-form-div-heading">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    
+                </svg>
+                Submit Your Query
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">First Name *</label>
+                <input type="text" class="form-control input_text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name *</label>
+                <input type="text" class="form-control input_text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile_number">Mobile Number *</label>
+                <input type="number" class="form-control input_text" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" class="form-control input_text" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="query">Your Query *</label>
+                <textarea class="form-control" id="query" name="query" rows="6" placeholder="Enter your query" required></textarea>
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-outline-primary btn-submit-btn btn-lg fw-bold">Send Query
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
+</html>
