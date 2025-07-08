@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Courses Carousel - Three Cards View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .header {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: #ffcc00;
+            border-radius: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 30px auto 0;
+            line-height: 1.7;
+        }
+        
+        .carousel-container {
+            position: relative;
+            padding: 0 50px;
+            margin: 60px 0;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .carousel {
+            display: flex;
+            gap: 30px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s ease;
+            flex: 0 0 calc(33.333% - 20px); /* Three cards with gap adjustment */
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+        
+        .card-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .card-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        }
+        
+        .card-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: left;
+            font-weight: 700;
+        }
+        
+        .card-description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            text-align: left;
+            margin-bottom: 25px;
+            flex: 1;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            color: #b21f1f;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            float: left;
+        }
+        
+        .read-more:hover {
+            color: #ffcc00;
+            transform: translateX(10px);
+        }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.5rem;
+            color: #1a2a6c;
+        }
+        
+        .nav-btn:hover {
+            background: #ffcc00;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev-btn {
+            left: 0;
+        }
+        
+        .next-btn {
+            right: 0;
+        }
+        
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #ffcc00;
+            transform: scale(1.3);
+        }
+        
+        .floating-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ffcc00;
+            color: #1a2a6c;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 20px;
+            right: -5px;
+            background: #b21f1f;
+            color: white;
+            font-weight: 700;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 2;
+            transform: rotate(5deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popular-tag::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-top: 10px solid #8a0000;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .course-card {
+                flex: 0 0 calc(50% - 15px); /* Two cards on medium screens */
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .course-card {
+                flex: 0 0 calc(50% - 15px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .course-card {
+                flex: 0 0 100%; /* Single card on small screens */
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .carousel-container {
+                padding: 0 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-description {
+                font-size: 1rem;
+            }
+            
+            .carousel-container {
+                padding: 0 30px;
+            }
+        }
+        
+        .footer {
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+        
+        /* Stats container */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px 30px;
+            min-width: 200px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="section-title">OUR POPULAR COURSES</h1>
+            <p class="subtitle">Our expert teachers provide the conceptual coaching for army written test and physical training programs.</p>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value">5000+</div>
+                <div class="stat-label">Students Trained</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">97%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+        
+        <div class="carousel-container">
+            <button class="nav-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="carousel">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUoaWTnt7qzIulDw5RIYmARNWKcnIbqbB_-A&s');">
+                        <div class="floating-badge">Physical Training</div>
+                        <div class="popular-tag">HOT</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Police Physical Training</h3>
+                        <p class="card-description">Comprehensive physical training program designed to prepare candidates for police force requirements. Includes strength training, endurance exercises, and obstacle course techniques.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('data:image/jpeg;base64,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');">
+                        <div class="floating-badge">Written Exam</div>
+                        <div class="popular-tag">BEST</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Indian Army Training</h3>
+                        <p class="card-description">Specialized preparation for Indian Army entrance exams. Covers all subjects including general knowledge, mathematics, reasoning, and current affairs.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSuwUrnkR63Vaud5Neau_pZUoFtKmcOwkKaQ&s');">
+                        <div class="floating-badge">Athletics</div>
+                        <div class="popular-tag">NEW</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Running / Long & High Jump</h3>
+                        <p class="card-description">Master running techniques and jumping skills with our experts. Program includes sprint training, long jump techniques, and high jump strategies.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Card 4 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeXfKamNsjYRy-vVEMNVpUwwGtrKtzHImMlA&s');">
+                        <div class="floating-badge">Strategy</div>
+                        <div class="popular-tag">TOP</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Defense Strategy & Tactics</h3>
+                        <p class="card-description">Learn advanced defense strategies from military experts. Course covers tactical decision-making, field operations, and strategic planning.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Card 5 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmm4DK1sUINyCDGzWle2fPK59wpBrRap-McA&s');">
+                        <div class="floating-badge">Combat</div>
+                        <div class="popular-tag">HOT</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combat Training Program</h3>
+                        <p class="card-description">Master hand-to-hand combat with our intensive program. Includes self-defense techniques, weapon training, and situational combat strategies.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Course Card 6 -->
+                <div class="course-card">
+                    <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQYMOmyL3OOIYrC8rbP0aGT7v8m6GqniTYEQ&s');">
+                        <div class="floating-badge">Navigation</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Field Navigation & Survival</h3>
+                        <p class="card-description">Learn essential field navigation and survival skills. Course covers map reading, compass use, shelter building, and wilderness survival techniques.</p>
+                        <a href="#" class="read-more">READ MORE <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="nav-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Military Training Academy. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const indicators = document.querySelectorAll('.indicator');
+            const cards = document.querySelectorAll('.course-card');
+            
+            // Calculate card width including gap
+            const cardStyle = window.getComputedStyle(cards[0]);
+            const cardWidth = cards[0].offsetWidth + 
+                             parseInt(cardStyle.marginRight) + 
+                             parseInt(cardStyle.marginLeft) +
+                             parseInt(cardStyle.borderLeftWidth) +
+                             parseInt(cardStyle.borderRightWidth);
+            
+            let currentPosition = 0;
+            let currentIndex = 0;
+            const totalCards = cards.length;
+            const cardsPerView = 3;
+            const totalSlides = Math.ceil(totalCards / cardsPerView);
+            
+            // Update indicators based on total slides
+            function updateIndicators() {
+                indicators.forEach((indicator, index) => {
+                    if (index < totalSlides) {
+                        indicator.style.display = 'block';
+                        indicator.classList.toggle('active', index === currentIndex);
+                    } else {
+                        indicator.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Function to move carousel
+            function moveCarousel() {
+                carousel.style.transform = `translateX(${currentPosition}px)`;
+                updateIndicators();
+            }
+            
+            // Initialize indicators
+            updateIndicators();
+            
+            // Next button functionality
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    currentPosition = -currentIndex * cardWidth * cardsPerView;
+                    moveCarousel();
+                }
+            });
+            
+            // Previous button functionality
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    currentPosition = -currentIndex * cardWidth * cardsPerView;
+                    moveCarousel();
+                }
+            });
+            
+            // Indicator click functionality
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    currentPosition = -currentIndex * cardWidth * cardsPerView;
+                    moveCarousel();
+                });
+            });
+            
+            // Auto-scroll for demonstration
+            let autoScroll = setInterval(() => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                currentPosition = -currentIndex * cardWidth * cardsPerView;
+                moveCarousel();
+            }, 5000);
+            
+            // Pause auto-scroll when hovering
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoScroll);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoScroll = setInterval(() => {
+                    if (currentIndex < totalSlides - 1) {
+                        currentIndex++;
+                    } else {
+                        currentIndex = 0;
+                    }
+                    currentPosition = -currentIndex * cardWidth * cardsPerView;
+                    moveCarousel();
+                }, 5000);
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                // Recalculate card width
+                const newCardWidth = cards[0].offsetWidth + 
+                                  parseInt(cardStyle.marginRight) + 
+                                  parseInt(cardStyle.marginLeft) +
+                                  parseInt(cardStyle.borderLeftWidth) +
+                                  parseInt(cardStyle.borderRightWidth);
+                
+                // Update position based on new width
+                currentPosition = -currentIndex * newCardWidth * cardsPerView;
+                moveCarousel();
+            });
+        });
+    </script>
+</body>
+</html>

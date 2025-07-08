@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edupls - Responsive Hero Slider</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Unique class names to prevent conflicts */
+        .ed-hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: #0a192f;
+        }
+        
+        .ed-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            z-index: 1;
+        }
+        
+        .ed-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .ed-slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.85);
+            z-index: 3;
+        }
+        
+        .ed-content {
+            position: relative;
+            z-index: 4;
+            padding: 2rem;
+            max-width: 1200px;
+            /* margin: 0 auto; */
+            margin-left: 2rem;
+        }
+        
+        .ed-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00a8e8, #0077b6);
+            color: white;
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 120, 215, 0.3);
+        }
+        
+        .ed-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ed-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .ed-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .ed-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #00a8e8, #0077b6);
+            color: white;
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 120, 215, 0.4);
+        }
+        
+        .ed-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 120, 215, 0.6);
+        }
+        
+        .ed-play {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .ed-play-circle {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .ed-play-circle::before {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: ed-pulse 2s infinite ease-in-out;
+        }
+        
+        .ed-play-icon {
+            color: #0077b6;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+        
+        @keyframes ed-pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+        
+        .ed-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .ed-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .ed-arrow:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .ed-pagination {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.8rem;
+            z-index: 5;
+        }
+        
+        .ed-pagination-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ed-pagination-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .ed-title {
+                font-size: 3rem;
+            }
+            
+            .ed-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ed-title {
+                font-size: 2.5rem;
+            }
+            
+            .ed-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .ed-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .ed-nav {
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .ed-title {
+                font-size: 2rem;
+            }
+            
+            .ed-subtitle {
+                font-size: 1rem;
+            }
+            
+            .ed-btn, .ed-play {
+                font-size: 0.9rem;
+            }
+            
+            .ed-play-circle {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .ed-play-circle::before {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .ed-arrow {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="ed-hero">
+        <!-- Slide 1 -->
+        <div class="ed-slide active" style="background-image: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')"></div>
+        
+        <!-- Slide 2 -->
+        <div class="ed-slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')"></div>
+        
+        <!-- Slide 3 -->
+        <div class="ed-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')"></div>
+        
+        <div class="ed-slide-overlay"></div>
+        
+        <div class="ed-content">
+            <div class="ed-badge" id="edDiscount">35% OFF</div>
+            
+            <h1 class="ed-title" id="edTitle">Featured Courses<br>Our Edupls<br>Theme</h1>
+            
+            <p class="ed-subtitle" id="edSubtitle">
+                We believe that with the right guidance, support, and mindset,<br>
+                you can accomplish anything you set your
+            </p>
+            
+            <div class="ed-controls">
+                <a href="#" class="ed-btn">
+                    Make Appointment <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+                
+                <a href="#" class="ed-play">
+                    <div class="ed-play-circle">
+                        <i class="fas fa-play ed-play-icon"></i>
+                    </div>
+                    Play Now
+                </a>
+                
+                <div class="ed-nav">
+                    <div class="ed-arrow" id="edPrev">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="ed-arrow" id="edNext">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ed-pagination" id="edPagination">
+            <div class="ed-pagination-dot active" data-index="0"></div>
+            <div class="ed-pagination-dot" data-index="1"></div>
+            <div class="ed-pagination-dot" data-index="2"></div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slide elements
+            const slides = document.querySelectorAll('.ed-slide');
+            const paginationDots = document.querySelectorAll('.ed-pagination-dot');
+            const prevBtn = document.getElementById('edPrev');
+            const nextBtn = document.getElementById('edNext');
+            
+            // Content elements
+            const discount = document.getElementById('edDiscount');
+            const title = document.getElementById('edTitle');
+            const subtitle = document.getElementById('edSubtitle');
+            
+            // Slide data
+            const slideData = [
+                {
+                    discount: '35% OFF',
+                    title: 'Featured Courses<br>Our Edupls<br>Theme',
+                    subtitle: 'We believe that with the right guidance, support, and mindset,<br>you can accomplish anything you set your'
+                },
+                {
+                    discount: '25% OFF',
+                    title: 'Expert Instructors<br>Quality Learning<br>Experience',
+                    subtitle: 'Learn from industry professionals with years of experience<br>in their respective fields'
+                },
+                {
+                    discount: '40% OFF',
+                    title: 'Interactive Courses<br>Practical Skills<br>Real Results',
+                    subtitle: 'Hands-on learning approach that helps you master skills<br>and achieve your career goals'
+                }
+            ];
+            
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to change slide
+            function changeSlide(index) {
+                // Remove active class from current slide and dot
+                slides[currentSlide].classList.remove('active');
+                paginationDots[currentSlide].classList.remove('active');
+                
+                // Update current slide index
+                currentSlide = (index + slides.length) % slides.length;
+                
+                // Add active class to new slide and dot
+                slides[currentSlide].classList.add('active');
+                paginationDots[currentSlide].classList.add('active');
+                
+                // Update content
+                discount.textContent = slideData[currentSlide].discount;
+                title.innerHTML = slideData[currentSlide].title;
+                subtitle.innerHTML = slideData[currentSlide].subtitle;
+            }
+            
+            // Next slide function
+            function nextSlide() {
+                changeSlide(currentSlide + 1);
+            }
+            
+            // Previous slide function
+            function prevSlide() {
+                changeSlide(currentSlide - 1);
+            }
+            
+            // Start autoplay
+            function startAutoplay() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Stop autoplay
+            function stopAutoplay() {
+                clearInterval(slideInterval);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', function () {
+    prevSlide();
+    startAutoplayOnce(); // <- only starts once
+});
+
+nextBtn.addEventListener('click', function () {
+    nextSlide();
+    startAutoplayOnce();
+});
+
+paginationDots.forEach(dot => {
+    dot.addEventListener('click', function () {
+        const index = parseInt(this.getAttribute('data-index'));
+        if (index !== currentSlide) {
+            changeSlide(index);
+            // startAutoplayOnce();
+        }
+    });
+});
+
+            // Start autoplay initially
+            // startAutoplay();
+            
+            // Pause autoplay when interacting with controls
+            const controls = document.querySelector('.ed-controls');
+            // controls.addEventListener('mouseenter', stopAutoplay);
+            // controls.addEventListener('mouseleave', startAutoplay);
+        });
+    </script>
+</body>
+</html>

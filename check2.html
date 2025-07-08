@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edupls - Courses Section</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --secondary: #f8f9fa;
+            --accent: #ff6b6b;
+            --text: #333;
+            --light-text: #6c757d;
+            --card-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--text);
+            padding: 20px;
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--light-text);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .course-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .course-content {
+            padding: 20px;
+        }
+        
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .course-instructor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--light-text);
+        }
+        
+        .instructor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        .course-lessons {
+            background: #e9f7fe;
+            color: #0d6efd;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .course-description {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .filter-container {
+                gap: 8px;
+            }
+            
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="section-title">OUR COURSES PLAN</h1>
+            <p class="section-subtitle">Our Most Popular Courses</p>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="development">Development</button>
+            <button class="filter-btn" data-filter="marketing">Marketing</button>
+            <button class="filter-btn" data-filter="chemistry">Chemistry</button>
+            <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+        </div>
+        
+        <!-- Courses Grid -->
+        <div class="courses-grid">
+            <!-- Course 1 -->
+            <div class="course-card" data-category="mathematics">
+                <div class="course-image" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">W</div>
+                            William
+                        </div>
+                        <div class="course-lessons">15 Lesson</div>
+                    </div>
+                    <h3 class="course-title">Advanced Calculus</h3>
+                    <p class="course-description">Master complex calculus concepts with practical applications.</p>
+                </div>
+            </div>
+            
+            <!-- Course 2 -->
+            <div class="course-card" data-category="chemistry">
+                <div class="course-badge">Popular</div>
+                <div class="course-image" style="background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">C</div>
+                            Carry
+                        </div>
+                        <div class="course-lessons">15 Lesson</div>
+                    </div>
+                    <h3 class="course-title">Organic Chemistry</h3>
+                    <p class="course-description">Comprehensive study of organic compounds and reactions.</p>
+                </div>
+            </div>
+            
+            <!-- Course 3 -->
+            <div class="course-card" data-category="development">
+                <div class="course-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">A&O</div>
+                            Adrian & Olivia
+                        </div>
+                        <div class="course-lessons">12 Lesson</div>
+                    </div>
+                    <h3 class="course-title">Programming Languages</h3>
+                    <p class="course-description">Learn multiple programming languages and their applications.</p>
+                </div>
+            </div>
+            
+            <!-- Course 4 -->
+            <div class="course-card" data-category="design">
+                <div class="course-badge">New</div>
+                <div class="course-image" style="background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">J</div>
+                            Jessica
+                        </div>
+                        <div class="course-lessons">18 Lesson</div>
+                    </div>
+                    <h3 class="course-title">UI/UX Design for Beginners</h3>
+                    <p class="course-description">Create beautiful and functional user interfaces from scratch.</p>
+                </div>
+            </div>
+            
+            <!-- Course 5 -->
+            <div class="course-card" data-category="marketing">
+                <div class="course-image" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">M</div>
+                            Michael
+                        </div>
+                        <div class="course-lessons">10 Lesson</div>
+                    </div>
+                    <h3 class="course-title">Digital Marketing Strategies</h3>
+                    <p class="course-description">Effective marketing techniques for the digital age.</p>
+                </div>
+            </div>
+            
+            <!-- Course 6 -->
+            <div class="course-card" data-category="mathematics">
+                <div class="course-badge">Featured</div>
+                <div class="course-image" style="background: linear-gradient(135deg, #c3cfe2 0%, #f5f7fa 100%);"></div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <div class="course-instructor">
+                            <div class="instructor-avatar">R</div>
+                            Robert
+                        </div>
+                        <div class="course-lessons">20 Lesson</div>
+                    </div>
+                    <h3 class="course-title">Linear Algebra Mastery</h3>
+                    <p class="course-description">Comprehensive course covering all aspects of linear algebra.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Edupls Learning Platform. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide courses based on filter
+                    courseCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

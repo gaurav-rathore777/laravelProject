@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infinite Logo Carousel</title>
+  <style>
+    body {
+      background: #f1f5f9;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .logo-warning-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #eaf1f8;
+      padding: 5px;
+    }
+
+    .logo-warning-text {
+      margin-left: 1rem;
+      flex: 1 1 300px;
+      border-right: 1px solid black;
+    }
+
+    .logo-warning-text p {
+      color: #38434a;
+      font-weight: 400;
+      font-size: larger;
+    }
+
+    .logo-warning-text h5 {
+      font-weight: bold;
+      margin: 0 0 1px 0;
+      color: #38434a;
+      font-size: 2rem;
+    }
+
+    .logo-carousel-wrapper {
+      flex: 1 1 300px;
+      overflow: hidden;
+      position: relative;
+      height: 80px;
+    }
+
+    .logo-track {
+      display: flex;
+      white-space: nowrap;
+      position: absolute;
+      animation: logoScrollLinear 20s linear infinite;
+    }
+
+    .logo-item {
+      display: inline-block;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .logo-item img {
+      height: 60px;
+      object-fit: contain;
+    }
+
+    @keyframes logoScrollLinear {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-warning-section">
+  <div class="logo-warning-text">
+    <h5>WARNING :</h5>
+    <p>Beware of touts, otherwise the candidates themselves <br> will be responsible.</p>
+    <p>( दलालों से सावधान, अन्यथा अभ्यर्थी स्वयं जिम्मेदार होंगे। )</p>
+  </div>
+
+  <div class="logo-carousel-wrapper">
+    <div class="logo-track" id="logoTrack">
+      <!-- Logos will be injected here -->
+    </div>
+  </div>
+</div>
+
+<script>
+  const logos = [
+    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREL-UocW6fWrMaN_XqBopBWYPl7ovecbE2MA&s", name: "INDIGO" },
+    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToZApHDJYs6xzfspr4alvxTiCwPnxk0pfwMg&s", name: "SPICE JET" },
+    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_jEJWRgSj70MKOrDGz8D_8kr0mfHGpDEMg&s", name: "VISTARA" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/8/80/Air_India_Logo.svg", name: "AIR INDIA" }
+  ];
+
+  const track = document.getElementById("logoTrack");
+
+  function generateLogoSet() {
+    const fragment = document.createDocumentFragment();
+    logos.forEach(logo => {
+      const item = document.createElement("div");
+      item.className = "logo-item";
+      item.innerHTML = `
+        <img src="${logo.src}" alt="${logo.name}">
+        <div>${logo.name}</div>
+      `;
+      fragment.appendChild(item);
+    });
+    return fragment;
+  }
+
+  // Duplicate logos for infinite scroll
+  track.appendChild(generateLogoSet());
+  track.appendChild(generateLogoSet());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardian Shield Security Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a1929, #1a2a3a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        .guardian-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        
+        .shield-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .shield-header h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0, 180, 255, 0.8);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .shield-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #a0c0e0;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .defense-card {
+            background: rgba(10, 25, 41, 0.85);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 100, 200, 0.3);
+            position: relative;
+            height: 320px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .defense-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 100, 200, 0.5);
+            border-color: rgba(0, 180, 255, 0.6);
+        }
+        
+        .defense-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 80, 160, 0.2), transparent);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .card-core {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .security-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 80, 160, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 30px;
+            color: #4db8ff;
+            border: 2px solid rgba(0, 180, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .defense-card:hover .security-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 200, 255, 0.7);
+            color: #00ccff;
+        }
+        
+        .defense-card h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .defense-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #0066cc, #00aaff);
+            border-radius: 3px;
+        }
+        
+        .defense-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #c0d0e0;
+            flex-grow: 1;
+        }
+        
+        .card-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 100, 200, 0.3);
+        }
+        
+        .clearance-level {
+            background: rgba(200, 50, 50, 0.2);
+            color: #ff6666;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .access-btn {
+            background: linear-gradient(45deg, #0066cc, #0044aa);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .access-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .access-btn:hover {
+            background: linear-gradient(45deg, #0088ff, #0066cc);
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.7);
+        }
+        
+        .access-btn:hover::before {
+            left: 100%;
+        }
+        
+        .defense-card:nth-child(1) {
+            background: linear-gradient(135deg, rgba(10, 30, 50, 0.9), rgba(5, 15, 30, 0.9));
+        }
+        
+        .defense-card:nth-child(2) {
+            background: linear-gradient(135deg, rgba(20, 40, 60, 0.9), rgba(10, 25, 45, 0.9));
+        }
+        
+        .defense-card:nth-child(3) {
+            background: linear-gradient(135deg, rgba(15, 35, 55, 0.9), rgba(8, 20, 35, 0.9));
+        }
+        
+        .defense-card:nth-child(4) {
+            background: linear-gradient(135deg, rgba(25, 45, 70, 0.9), rgba(15, 30, 50, 0.9));
+        }
+        
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .security-grid {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+                margin: 0 auto;
+            }
+            
+            .shield-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .shield-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .shield-header p {
+                font-size: 1rem;
+            }
+            
+            .defense-card {
+                height: auto;
+            }
+            
+            .defense-card h2 {
+                font-size: 1.8rem;
+            }
+            
+            .defense-card p {
+                font-size: 1rem;
+            }
+        }
+        
+        .sentinel-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .sentinel-sweep {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                rgba(0, 200, 255, 0.1),
+                rgba(0, 200, 255, 0.3) 20%,
+                transparent 30%,
+                transparent
+            );
+            animation: sentinelSweep 5s linear infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes sentinelSweep {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .tech-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 120, 220, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0, 120, 220, 0.1) 1px, transparent 1px);
+            background-size: 25px 25px;
+            z-index: 1;
+            opacity: 0.4;
+        }
+        
+        .scanning-lights {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .scanning-lights::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 220, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 
+                30px 40px 0 0 rgba(0, 220, 255, 0.8),
+                120px 80px 0 0 rgba(0, 220, 255, 0.8),
+                200px 150px 0 0 rgba(0, 220, 255, 0.8),
+                80px 220px 0 0 rgba(0, 220, 255, 0.8),
+                250px 50px 0 0 rgba(0, 220, 255, 0.8),
+                180px 250px 0 0 rgba(0, 220, 255, 0.8);
+            animation: scanningLights 3s infinite linear;
+        }
+        
+        @keyframes scanningLights {
+            0%, 100% {
+                opacity: 0.2;
+                filter: blur(1px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+        
+        /* Header animation */
+        .shield-header::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 120, 255, 0.2), transparent 70%);
+            z-index: 1;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.4;
+                transform: translateX(-50%) scale(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+        
+        /* Background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 180, 255, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="guardian-container">
+        <div class="shield-header">
+            <h1><i class="fas fa-shield-alt"></i> GUARDIAN SHIELD SYSTEMS</h1>
+            <p>Advanced security infrastructure for critical national defense operations</p>
+        </div>
+        
+        <div class="security-grid">
+            <!-- Card 1 -->
+            <div class="defense-card">
+                <div class="sentinel-animation">
+                    <div class="sentinel-sweep"></div>
+                    <div class="tech-grid"></div>
+                    <div class="scanning-lights"></div>
+                </div>
+                <div class="card-core">
+                    <div class="security-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h2>Orbital Surveillance</h2>
+                    <p>Advanced satellite network with real-time monitoring and threat detection capabilities. Global coverage with sub-meter resolution.</p>
+                    <div class="card-foot">
+                        <div class="clearance-level">OMEGA CLEARANCE</div>
+                        <button class="access-btn">Access <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="defense-card">
+                <div class="sentinel-animation">
+                    <div class="sentinel-sweep"></div>
+                    <div class="tech-grid"></div>
+                    <div class="scanning-lights"></div>
+                </div>
+                <div class="card-core">
+                    <div class="security-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2>Aegis Defense</h2>
+                    <p>Next-generation missile interception systems with AI-powered tracking and hypervelocity kinetic impactors.</p>
+                    <div class="card-foot">
+                        <div class="clearance-level">CLASSIFIED</div>
+                        <button class="access-btn">Access <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="defense-card">
+                <div class="sentinel-animation">
+                    <div class="sentinel-sweep"></div>
+                    <div class="tech-grid"></div>
+                    <div class="scanning-lights"></div>
+                </div>
+                <div class="card-core">
+                    <div class="security-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h2>Cyber Fortress</h2>
+                    <p>Quantum-resistant encryption and AI-powered intrusion detection systems protecting critical infrastructure from cyber threats.</p>
+                    <div class="card-foot">
+                        <div class="clearance-level">ULTRA SECRET</div>
+                        <button class="access-btn">Access <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="defense-card">
+                <div class="sentinel-animation">
+                    <div class="sentinel-sweep"></div>
+                    <div class="tech-grid"></div>
+                    <div class="scanning-lights"></div>
+                </div>
+                <div class="card-core">
+                    <div class="security-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2>Automated Response</h2>
+                    <p>AI-controlled drone swarms with autonomous decision-making capabilities for rapid threat neutralization.</p>
+                    <div class="card-foot">
+                        <div class="clearance-level">RESTRICTED</div>
+                        <button class="access-btn">Access <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive card effects
+        document.querySelectorAll('.defense-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleY = (x - centerX) / 20;
+                const angleX = (centerY - y) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-15px)';
+            });
+        });
+        
+        // Create background particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 80; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation delay and duration
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+            particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+            
+            // Random size
+            const size = 0.5 + Math.random() * 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Button ripple effect
+        document.querySelectorAll('.access-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.offsetX;
+                const y = e.offsetY;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
+</body>
+</html>

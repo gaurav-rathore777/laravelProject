@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Platform - Statistics & Instructors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --secondary: #f8f9fa;
+            --accent: #ff6b6b;
+            --dark: #2e3a59;
+            --light: #f8f9fc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--dark);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* Statistics Section */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            min-width: 180px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .stat-number::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Instructors Section */
+        .instructors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .instructor-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .instructor-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4cb3 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .instructor-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .instructor-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .instructor-title {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .instructor-body {
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .instructor-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-name {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-container {
+                gap: 20px;
+            }
+            
+            .stat-card {
+                min-width: 140px;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-custom">
+        <!-- Statistics Section -->
+        <div class="section">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">4.8K</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">325</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">598</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">36K</div>
+                    <div class="stat-label">Hours of Content</div>
+                </div>
+            </div>
+            
+            <!-- Popular Instructors Section -->
+            <h2 class="section-title">Our Most Popular Instructor</h2>
+            
+            <div class="instructors-container">
+                <!-- Instructor 1 -->
+                <div class="instructor-card">
+                    <div class="instructor-header">
+                        <div class="instructor-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="instructor-name">HOME README</h3>
+                        <p class="instructor-title">Senior Instructor</p>
+                    </div>
+                    <div class="instructor-body">
+                        <div class="instructor-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">98%</div>
+                                <div class="stat-name">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">42</div>
+                                <div class="stat-name">Courses</div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructor 2 -->
+                <div class="instructor-card">
+                    <div class="instructor-header">
+                        <div class="instructor-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3 class="instructor-name">PROMOTIONER</h3>
+                        <p class="instructor-title">Marketing Expert</p>
+                    </div>
+                    <div class="instructor-body">
+                        <div class="instructor-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">96%</div>
+                                <div class="stat-name">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">35</div>
+                                <div class="stat-name">Courses</div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructor 3 -->
+                <div class="instructor-card">
+                    <div class="instructor-header">
+                        <div class="instructor-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="instructor-name">PHONE LEADER</h3>
+                        <p class="instructor-title">Communication Specialist</p>
+                    </div>
+                    <div class="instructor-body">
+                        <div class="instructor-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">97%</div>
+                                <div class="stat-name">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">38</div>
+                                <div class="stat-name">Courses</div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructor 4 -->
+                <div class="instructor-card">
+                    <div class="instructor-header">
+                        <div class="instructor-icon">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <h3 class="instructor-name">AND SIGN</h3>
+                        <p class="instructor-title">Design Expert</p>
+                    </div>
+                    <div class="instructor-body">
+                        <div class="instructor-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">95%</div>
+                                <div class="stat-name">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">31</div>
+                                <div class="stat-name">Courses</div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructor 5 -->
+                <div class="instructor-card">
+                    <div class="instructor-header">
+                        <div class="instructor-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3 class="instructor-name">AND PASS</h3>
+                        <p class="instructor-title">Certification Specialist</p>
+                    </div>
+                    <div class="instructor-body">
+                        <div class="instructor-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">99%</div>
+                                <div class="stat-name">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">47</div>
+                                <div class="stat-name">Courses</div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Edupls Learning Platform. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
