@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Animation Showcase</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 20px;
+      position: relative;
+    }
+    
+    /* Background particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      opacity: 0;
+      animation: floatParticle linear infinite;
+    }
+    
+    /* Main container */
+    .showcase-section {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      perspective: 1000px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* Header with text animations */
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 20;
+    }
+    
+    .section-title {
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, #ff8a00, #e52e71, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: titleGlow 3s infinite alternate, textFloat 4s infinite ease-in-out;
+    }
+    
+    .section-subtitle {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.6rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      animation: subtitleFloat 5s infinite ease-in-out;
+      position: relative;
+    }
+    
+    .section-subtitle::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 4px;
+      width: 100px;
+      background: linear-gradient(to right, #ff8a00, #e52e71, #00c9ff);
+      border-radius: 2px;
+      animation: linePulse 2s infinite alternate;
+    }
+    
+    /* Grid with animated cards */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      position: relative;
+      z-index: 15;
+    }
+    
+    .showcase-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transform-style: preserve-3d;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) rotateX(15deg);
+      animation: cardEntrance 0.8s forwards;
+    }
+    
+    .showcase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #ff8a00, #e52e71, #00c9ff);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .showcase-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: -1;
+    }
+    
+    .showcase-card:hover {
+      transform: translateY(-20px) scale(1.05) rotateY(8deg) rotateX(-3deg);
+      box-shadow: 0 35px 60px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    
+    .showcase-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .showcase-card:hover::after {
+      opacity: 1;
+    }
+    
+    /* Card content with animations */
+    .card-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #ff8a00, #e52e71);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      font-size: 45px;
+      color: white;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+      transform: translateZ(50px);
+      transition: all 0.5s ease;
+      animation: iconFloat 4s infinite ease-in-out;
+    }
+    
+    .showcase-card:hover .card-icon {
+      transform: translateZ(50px) rotateY(360deg);
+      background: linear-gradient(135deg, #00c9ff, #92fe9d);
+      animation: iconPulse 1.5s infinite alternate;
+    }
+    
+    .card-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      transform: translateZ(30px);
+      position: relative;
+      animation: titleUnderline 3s infinite alternate;
+    }
+    
+    .card-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 3px;
+      width: 50px;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      border-radius: 2px;
+      animation: lineGrow 2s infinite alternate;
+    }
+    
+    .card-content {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.2rem;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      text-align: center;
+      transform: translateZ(20px);
+      animation: textFade 6s infinite alternate;
+    }
+    
+    /* Animated button */
+    .card-btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      padding: 16px 30px;
+      background: linear-gradient(90deg, #00c9ff, #92fe9d);
+      color: #1a1a2e;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transform: translateZ(40px);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      animation: btnFloat 3s infinite ease-in-out;
+    }
+    
+    .card-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff8a00, #e52e71);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20px;
+      height: 200%;
+      background: rgba(255,255,255,0.3);
+      transform: rotate(25deg);
+      transition: all 0.4s;
+    }
+    
+    .card-btn:hover::before {
+      opacity: 1;
+    }
+    
+    .card-btn:hover::after {
+      left: 120%;
+    }
+    
+    .card-btn:hover {
+      color: white;
+      transform: translateZ(40px) scale(1.1);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    
+    /* Floating elements */
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      z-index: 5;
+      pointer-events: none;
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    .floating-element:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: 5%;
+      animation-duration: 20s;
+    }
+    
+    .floating-element:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: 15%;
+      right: 10%;
+      animation-duration: 18s;
+      animation-delay: 2s;
+    }
+    
+    .floating-element:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 40%;
+      right: 25%;
+      animation-duration: 22s;
+      animation-delay: 1s;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(-30px, -40px) rotate(15deg);
+      }
+      50% {
+        transform: translate(20px, 30px) rotate(-15deg);
+      }
+      75% {
+        transform: translate(25px, -25px) rotate(10deg);
+      }
+    }
+    
+    @keyframes cardEntrance {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+    
+    @keyframes titleGlow {
+      0% {
+        text-shadow: 0 0 10px rgba(255, 138, 0, 0.5),
+                     0 0 20px rgba(229, 46, 113, 0.5);
+      }
+      100% {
+        text-shadow: 0 0 20px rgba(255, 138, 0, 0.8),
+                     0 0 40px rgba(229, 46, 113, 0.8),
+                     0 0 60px rgba(0, 201, 255, 0.8),
+                     0 0 80px rgba(146, 254, 157, 0.8);
+      }
+    }
+    
+    @keyframes textFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes subtitleFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(8px);
+      }
+    }
+    
+    @keyframes linePulse {
+      0% {
+        width: 50px;
+      }
+      100% {
+        width: 200px;
+      }
+    }
+    
+    @keyframes iconFloat {
+      0%, 100% {
+        transform: translateZ(50px) translateY(0);
+      }
+      50% {
+        transform: translateZ(50px) translateY(-10px);
+      }
+    }
+    
+    @keyframes iconPulse {
+      0% {
+        transform: translateZ(50px) scale(1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      }
+      100% {
+        transform: translateZ(50px) scale(1.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      }
+    }
+    
+    @keyframes titleUnderline {
+      0% {
+        letter-spacing: 0;
+      }
+      100% {
+        letter-spacing: 3px;
+      }
+    }
+    
+    @keyframes lineGrow {
+      0% {
+        width: 0;
+        opacity: 0;
+      }
+      100% {
+        width: 100px;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes textFade {
+      0% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes btnFloat {
+      0%, 100% {
+        transform: translateZ(40px) translateY(0);
+      }
+      50% {
+        transform: translateZ(40px) translateY(-10px);
+      }
+    }
+    
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+      }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 1200px) {
+      .section-title {
+        font-size: 4rem;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .section-title {
+        font-size: 3.2rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1.3rem;
+      }
+      
+      .showcase-grid {
+        gap: 30px;
+      }
+      
+      .showcase-card {
+        padding: 30px 25px;
+      }
+      
+      .card-icon {
+        width: 85px;
+        height: 85px;
+        font-size: 40px;
+      }
+      
+      .card-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2.8rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .showcase-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      
+      .card-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 35px;
+      }
+      
+      .card-title {
+        font-size: 1.7rem;
+      }
+      
+      .card-content {
+        font-size: 1.1rem;
+      }
+      
+      .card-btn {
+        width: 180px;
+        padding: 14px 25px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      body {
+        padding: 15px;
+      }
+      
+      .section-header {
+        margin-bottom: 60px;
+      }
+      
+      .section-title {
+        font-size: 2.4rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1rem;
+      }
+      
+      .showcase-card {
+        padding: 25px 20px;
+      }
+      
+      .card-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+      
+      .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      
+      .card-content {
+        font-size: 1rem;
+        margin-bottom: 25px;
+      }
+      
+      .card-btn {
+        width: 170px;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Floating elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  
+  <!-- Main content -->
+  <section class="showcase-section">
+    <div class="section-header">
+      <h1 class="section-title">Advanced Animation Showcase</h1>
+      <p class="section-subtitle">Experience the future of web animation with multiple layered effects and smooth transitions</p>
+    </div>
+    
+    <div class="showcase-grid">
+      <!-- Card 1 -->
+      <div class="showcase-card">
+        <div class="card-icon">
+          <i class="fas fa-cube"></i>
+        </div>
+        <h3 class="card-title">3D Transformations</h3>
+        <p class="card-content">Immersive 3D effects that respond to cursor movement with realistic depth and perspective.</p>
+        <a href="#" class="card-btn">Explore</a>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="showcase-card">
+        <div class="card-icon">
+          <i class="fas fa-palette"></i>
+        </div>
+        <h3 class="card-title">Dynamic Gradients</h3>
+        <p class="card-content">Vibrant color transitions that create depth and visual interest with smooth animations.</p>
+        <a href="#" class="card-btn">Discover</a>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="showcase-card">
+        <div class="card-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3 class="card-title">Responsive Design</h3>
+        <p class="card-content">Perfectly adapts to any screen size with fluid transitions and optimized layouts.</p>
+        <a href="#" class="card-btn">View Demo</a>
+      </div>
+      
+      <!-- Card 4 -->
+      <div class="showcase-card">
+        <div class="card-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3 class="card-title">Performance Optimized</h3>
+        <p class="card-content">Hardware-accelerated animations ensure smooth performance on all devices.</p>
+        <a href="#" class="card-btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Create background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 20 + 5;
+        const posX = Math.random() * 100;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 5;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Interactive card effects
+    function initCardInteractivity() {
+      const cards = document.querySelectorAll('.showcase-card');
+      
+      document.addEventListener('mousemove', function(e) {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const cardCenterX = rect.left + rect.width / 2;
+          const cardCenterY = rect.top + rect.height / 2;
+          
+          const deltaX = e.clientX - cardCenterX;
+          const deltaY = e.clientY - cardCenterY;
+          
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          const maxDistance = 500;
+          const intensity = Math.min(1, distance / maxDistance);
+          
+          const rotateY = (deltaX / centerX) * 10 * (1 - intensity);
+          const rotateX = -(deltaY / centerY) * 10 * (1 - intensity);
+          
+          if (!card.classList.contains('active-hover')) {
+            card.style.transform = `translateY(-20px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+          }
+        });
+      });
+      
+      // Reset card position when mouse leaves section
+      document.querySelector('.showcase-section').addEventListener('mouseleave', function() {
+        cards.forEach(card => {
+          card.style.transform = 'translateY(-20px) scale(1.05) rotateY(8deg) rotateX(-3deg)';
+        });
+      });
+      
+      // Add class on hover for better control
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('active-hover');
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('active-hover');
+          card.style.transform = '';
+        });
+      });
+    }
+    
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      initCardInteractivity();
+      
+      // Make cards visible
+      const cards = document.querySelectorAll('.showcase-card');
+      setTimeout(() => {
+        cards.forEach(card => {
+          card.style.visibility = 'visible';
+        });
+      }, 300);
+    });
+  </script>
+</body>
+</html>

@@ -1,619 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defense Training Academy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0a1929, #1a2a3a);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-        
-        .defense-academy {
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .academy-header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .academy-header h1 {
-            font-size: 3.2rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(0, 180, 255, 0.8);
-            position: relative;
-            z-index: 3;
-        }
-        
-        .academy-header h1::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #0066cc, #00aaff);
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-        
-        .academy-header p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: #a0c0e0;
-            position: relative;
-            z-index: 3;
-        }
-        
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .training-card {
-            background: rgba(10, 25, 41, 0.85);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(0, 100, 200, 0.3);
-            position: relative;
-            height: 380px;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-            animation: floatCard 6s infinite ease-in-out;
-        }
-        
-        .training-card:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        
-        .training-card:nth-child(3) {
-            animation-delay: 1s;
-        }
-        
-        .training-card:nth-child(4) {
-            animation-delay: 1.5s;
-        }
-        
-        @keyframes floatCard {
-            0%, 100% {
-                transform: translateY(0) rotate(0.5deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(-0.5deg);
-            }
-        }
-        
-        .training-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 100, 200, 0.6);
-            border-color: rgba(0, 180, 255, 0.6);
-            animation: none;
-        }
-        
-        .card-content {
-            padding: 30px;
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .training-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(0, 80, 160, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            font-size: 30px;
-            color: #4db8ff;
-            border: 2px solid rgba(0, 180, 255, 0.6);
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .training-card:hover .training-icon {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(0, 200, 255, 0.7);
-            color: #00ccff;
-        }
-        
-        .training-card h2 {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            position: relative;
-        }
-        
-        .training-card h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #0066cc, #00aaff);
-            border-radius: 3px;
-        }
-        
-        .training-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #c0d0e0;
-            margin: 15px 0;
-            flex-grow: 1;
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: #88aadd;
-        }
-        
-        .course-duration, .course-level {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .enroll-btn {
-            background: linear-gradient(45deg, #0066cc, #0044aa);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 10px;
-            width: 100%;
-            justify-content: center;
-        }
-        
-        .enroll-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-        
-        .enroll-btn:hover {
-            background: linear-gradient(45deg, #0088ff, #0066cc);
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.7);
-        }
-        
-        .enroll-btn:hover::before {
-            left: 100%;
-        }
-        
-        .radar-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .radar-sweep {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: conic-gradient(
-                rgba(0, 200, 255, 0.1),
-                rgba(0, 200, 255, 0.3) 20%,
-                transparent 30%,
-                transparent
-            );
-            animation: radarSweep 5s linear infinite;
-            opacity: 0.6;
-        }
-        
-        @keyframes radarSweep {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .grid-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(0, 120, 220, 0.1) 1px, transparent 1px),
-                linear-gradient(rgba(0, 120, 220, 0.1) 1px, transparent 1px);
-            background-size: 25px 25px;
-            z-index: 1;
-            opacity: 0.4;
-        }
-        
-        .scanning-dots {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-        
-        .scanning-dots::before {
-            content: "";
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(0, 220, 255, 0.8);
-            border-radius: 50%;
-            box-shadow: 
-                30px 40px 0 0 rgba(0, 220, 255, 0.8),
-                120px 80px 0 0 rgba(0, 220, 255, 0.8),
-                200px 150px 0 0 rgba(0, 220, 255, 0.8),
-                80px 220px 0 0 rgba(0, 220, 255, 0.8),
-                250px 50px 0 0 rgba(0, 220, 255, 0.8),
-                180px 250px 0 0 rgba(0, 220, 255, 0.8);
-            animation: scanningDots 3s infinite linear;
-        }
-        
-        @keyframes scanningDots {
-            0%, 100% {
-                opacity: 0.2;
-                filter: blur(1px);
-            }
-            50% {
-                opacity: 1;
-                filter: blur(0);
-            }
-        }
-        
-        /* Header animation */
-        .academy-header::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 120, 255, 0.2), transparent 70%);
-            z-index: 1;
-            animation: pulse 4s infinite ease-in-out;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.4;
-                transform: translateX(-50%) scale(0.8);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translateX(-50%) scale(1.1);
-            }
-        }
-        
-        /* Background particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(0, 180, 255, 0.7);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
-        }
-        
-        /* Responsive design */
-        @media (max-width: 900px) {
-            .courses-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-            
-            .academy-header h1 {
-                font-size: 2.5rem;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .academy-header h1 {
-                font-size: 2rem;
-            }
-            
-            .academy-header p {
-                font-size: 1rem;
-            }
-            
-            .training-card {
-                height: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defense Web Courses</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .header h1 {
+      color: #fff;
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      letter-spacing:-.5px;
+    }
+    
+    .header p {
+      color: #a0b3c6;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .divider {
+      height: 4px;
+      width: 80px;
+      background: linear-gradient(to right, #ee8834, #2ecc71);
+      margin: 20px auto;
+      border-radius: 2px;
+    }
+    
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    
+    .course-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 35px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, #ee8834, #2ecc71);
+    }
+    
+    .course-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .icon-container {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #ee8834 0%, #2ecc71 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .course-card:hover .icon-container {
+      transform: rotate(15deg) scale(1.1);
+    }
+    
+    .icon-container i {
+      font-size: 30px;
+      color: white;
+    }
+    
+    .course-card h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+    
+    .course-card .duration {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .course-card p {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(to right, #ee8834, #2ecc71);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+    
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .course-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    
+    .course-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+    
+    .course-card:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+    
+    .course-card:nth-child(4) {
+      animation-delay: 0.7s;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #a0b3c6;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .header p {
+        font-size: 1rem;
+      }
+      
+      .course-card {
+        padding: 25px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="defense-academy">
-        <div class="academy-header">
-            <h1><i class="fas fa-shield-alt"></i> DEFENSE TRAINING ACADEMY</h1>
-            <p>Specialized courses for military and defense professionals</p>
-        </div>
-        
-        <div class="courses-grid">
-            <!-- Course 1 -->
-            <div class="training-card">
-                <div class="radar-animation">
-                    <div class="radar-sweep"></div>
-                    <div class="grid-lines"></div>
-                    <div class="scanning-dots"></div>
-                </div>
-                <div class="card-content">
-                    <div class="training-icon">
-                        <i class="fas fa-satellite"></i>
-                    </div>
-                    <h2>Satellite Intelligence</h2>
-                    <p>Master the art of satellite surveillance and intelligence gathering with cutting-edge orbital technology.</p>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="far fa-clock"></i> 8 Weeks
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-layer-group"></i> Advanced
-                        </div>
-                    </div>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="fas fa-user-graduate"></i> Certified
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-chart-line"></i> Tactical
-                        </div>
-                    </div>
-                    <button class="enroll-btn">
-                        Enroll Now <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Course 2 -->
-            <div class="training-card">
-                <div class="radar-animation">
-                    <div class="radar-sweep"></div>
-                    <div class="grid-lines"></div>
-                    <div class="scanning-dots"></div>
-                </div>
-                <div class="card-content">
-                    <div class="training-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h2>Cyber Warfare</h2>
-                    <p>Defensive and offensive cyber operations training with real-world simulation exercises.</p>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="far fa-clock"></i> 12 Weeks
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-layer-group"></i> Expert
-                        </div>
-                    </div>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="fas fa-user-graduate"></i> Certified
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-chart-line"></i> Strategic
-                        </div>
-                    </div>
-                    <button class="enroll-btn">
-                        Enroll Now <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Course 3 -->
-            <div class="training-card">
-                <div class="radar-animation">
-                    <div class="radar-sweep"></div>
-                    <div class="grid-lines"></div>
-                    <div class="scanning-dots"></div>
-                </div>
-                <div class="card-content">
-                    <div class="training-icon">
-                        <i class="fas fa-helicopter"></i>
-                    </div>
-                    <h2>Aerial Defense</h2>
-                    <p>Comprehensive training in anti-air systems, drone operations and aerial threat neutralization.</p>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="far fa-clock"></i> 10 Weeks
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-layer-group"></i> Intermediate
-                        </div>
-                    </div>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="fas fa-user-graduate"></i> Certified
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-chart-line"></i> Tactical
-                        </div>
-                    </div>
-                    <button class="enroll-btn">
-                        Enroll Now <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Course 4 -->
-            <div class="training-card">
-                <div class="radar-animation">
-                    <div class="radar-sweep"></div>
-                    <div class="grid-lines"></div>
-                    <div class="scanning-dots"></div>
-                </div>
-                <div class="card-content">
-                    <div class="training-icon">
-                        <i class="fas fa-user-secret"></i>
-                    </div>
-                    <h2>Covert Operations</h2>
-                    <p>Advanced techniques in intelligence gathering, surveillance, and special operations tactics.</p>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="far fa-clock"></i> 14 Weeks
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-layer-group"></i> Advanced
-                        </div>
-                    </div>
-                    <div class="course-meta">
-                        <div class="course-duration">
-                            <i class="fas fa-user-graduate"></i> Certified
-                        </div>
-                        <div class="course-level">
-                            <i class="fas fa-chart-line"></i> Strategic
-                        </div>
-                    </div>
-                    <button class="enroll-btn">
-                        Enroll Now <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>Defense Web Training Courses</h1>
+      <div class="divider"></div>
+      <p>Master the art of web defense with our comprehensive security courses. Learn to protect, detect, and respond to cyber threats effectively.</p>
     </div>
-
-    <script>
-        // Create background particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 80; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Random position
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            
-            // Random animation delay and duration
-            particle.style.animationDelay = `${Math.random() * 15}s`;
-            particle.style.animationDuration = `${10 + Math.random() * 20}s`;
-            
-            // Random size
-            const size = 0.5 + Math.random() * 3;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            particlesContainer.appendChild(particle);
-        }
-        
-        // Add interactive card effects
-        document.querySelectorAll('.training-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleY = (x - centerX) / 25;
-                const angleX = (centerY - y) / 25;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px) scale(1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px) scale(1.02)';
-            });
+    
+    <div class="course-grid">
+      <!-- Card 1 -->
+      <div class="course-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>
+            <h3>Web Security Fundamentals</h3>
+            <div class="duration">8 Weeks Course</div>
+          </div>
+        </div>
+        <p>Learn the core principles of web security, common vulnerabilities, and how to protect your applications from modern attacks. Gain practical skills in threat modeling and security testing.</p>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="course-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <i class="fas fa-user-secret"></i>
+          </div>
+          <div>
+            <h3>Penetration Testing</h3>
+            <div class="duration">10 Weeks Course</div>
+          </div>
+        </div>
+        <p>Master ethical hacking techniques to identify and exploit vulnerabilities in web applications before attackers do. Learn to perform comprehensive security assessments and penetration tests.</p>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="course-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div>
+            <h3>Secure Coding Practices</h3>
+            <div class="duration">6 Weeks Course</div>
+          </div>
+        </div>
+        <p>Develop applications with security in mind from the start. Learn industry best practices for writing secure code and preventing common vulnerabilities in web applications.</p>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+      
+      <!-- Card 4 -->
+      <div class="course-card">
+        <div class="card-header">
+          <div class="icon-container">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <div>
+            <h3>Network Defense Strategies</h3>
+            <div class="duration">12 Weeks Course</div>
+          </div>
+        </div>
+        <p>Understand how to secure network infrastructure and implement effective defense mechanisms against cyber threats. Learn firewall configuration, intrusion detection, and traffic analysis.</p>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>© 2023 CyberDefense Academy. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <script>
+    // Add scroll animation effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.course-card');
+      
+      // Add a slight delay for animation after page load
+      setTimeout(() => {
+        cards.forEach(card => {
+          card.style.visibility = 'visible';
         });
-        
-        // Button ripple effect
-        document.querySelectorAll('.enroll-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const x = e.offsetX;
-                const y = e.offsetY;
-                
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-    </script>
+      }, 300);
+    });
+  </script>
 </body>
 </html>

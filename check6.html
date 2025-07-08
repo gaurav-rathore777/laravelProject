@@ -3,68 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Infinite Logo Carousel</title>
+  <title>Warning & Logo Carousel</title>
   <style>
     body {
-      background: #f1f5f9;
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
     }
 
-    .logo-warning-section {
+    .warning-logo-section {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
       flex-wrap: wrap;
+      align-items: center;
       background-color: #eaf1f8;
-      padding: 5px;
+      border: 1px solid #d0d7de;
+      padding: 20px;
+      gap: 20px;
     }
 
-    .logo-warning-text {
-      margin-left: 1rem;
+    .warning-text {
       flex: 1 1 300px;
-      border-right: 1px solid black;
+      border-right: 2px solid #b0bec5;
+      padding-right: 20px;
     }
 
-    .logo-warning-text p {
-      color: #38434a;
-      font-weight: 400;
-      font-size: larger;
+    .warning-text h5 {
+      font-size: 1.8rem;
+      color: #c0392b;
+      margin: 0 0 10px;
     }
 
-    .logo-warning-text h5 {
-      font-weight: bold;
-      margin: 0 0 1px 0;
-      color: #38434a;
-      font-size: 2rem;
+    .warning-text p {
+      color: #2c3e50;
+      font-size: 1.05rem;
+      line-height: 1.5;
     }
 
-    .logo-carousel-wrapper {
-      flex: 1 1 300px;
+    .carousel-wrapper {
+      flex: 1 1 400px;
       overflow: hidden;
+      height: 90px;
       position: relative;
-      height: 80px;
     }
 
-    .logo-track {
+    .carousel-track {
       display: flex;
       white-space: nowrap;
-      position: absolute;
-      animation: logoScrollLinear 20s linear infinite;
+      animation: scrollLeft 20s linear infinite;
     }
 
-    .logo-item {
-      display: inline-block;
+    .carousel-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 25px;
+      min-width: 120px;
       text-align: center;
-      padding: 0 20px;
     }
 
-    .logo-item img {
-      height: 60px;
+    .carousel-item img {
+      height: 50px;
       object-fit: contain;
+      margin-bottom: 5px;
     }
 
-    @keyframes logoScrollLinear {
+    .carousel-item div {
+      font-size: 0.9rem;
+      color: #37474f;
+    }
+
+    @keyframes scrollLeft {
       from {
         transform: translateX(0);
       }
@@ -72,52 +81,65 @@
         transform: translateX(-50%);
       }
     }
+
+    @media (max-width: 768px) {
+      .warning-logo-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .warning-text {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="logo-warning-section">
-  <div class="logo-warning-text">
-    <h5>WARNING :</h5>
-    <p>Beware of touts, otherwise the candidates themselves <br> will be responsible.</p>
-    <p>( दलालों से सावधान, अन्यथा अभ्यर्थी स्वयं जिम्मेदार होंगे। )</p>
-  </div>
+  <div class="warning-logo-section">
+    <!-- Warning Text Section -->
+    <div class="warning-text">
+      <h5>⚠️ WARNING:</h5>
+      <p>Beware of touts, otherwise the candidates themselves will be responsible.</p>
+      <p>( दलालों से सावधान, अन्यथा अभ्यर्थी स्वयं जिम्मेदार होंगे। )</p>
+    </div>
 
-  <div class="logo-carousel-wrapper">
-    <div class="logo-track" id="logoTrack">
-      <!-- Logos will be injected here -->
+    <!-- Logo Carousel Section -->
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Logos injected by JavaScript -->
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const logos = [
-    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREL-UocW6fWrMaN_XqBopBWYPl7ovecbE2MA&s", name: "INDIGO" },
-    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToZApHDJYs6xzfspr4alvxTiCwPnxk0pfwMg&s", name: "SPICE JET" },
-    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_jEJWRgSj70MKOrDGz8D_8kr0mfHGpDEMg&s", name: "VISTARA" },
-    { src: "https://upload.wikimedia.org/wikipedia/commons/8/80/Air_India_Logo.svg", name: "AIR INDIA" }
-  ];
+  <script>
+    const logos = [
+      { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREL-UocW6fWrMaN_XqBopBWYPl7ovecbE2MA&s", name: "INDIGO" },
+      { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToZApHDJYs6xzfspr4alvxTiCwPnxk0pfwMg&s", name: "SPICE JET" },
+      { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_jEJWRgSj70MKOrDGz8D_8kr0mfHGpDEMg&s", name: "VISTARA" },
+      { src: "https://upload.wikimedia.org/wikipedia/commons/8/80/Air_India_Logo.svg", name: "AIR INDIA" }
+    ];
 
-  const track = document.getElementById("logoTrack");
+    const track = document.getElementById("carouselTrack");
 
-  function generateLogoSet() {
-    const fragment = document.createDocumentFragment();
-    logos.forEach(logo => {
-      const item = document.createElement("div");
-      item.className = "logo-item";
-      item.innerHTML = `
-        <img src="${logo.src}" alt="${logo.name}">
-        <div>${logo.name}</div>
-      `;
-      fragment.appendChild(item);
-    });
-    return fragment;
-  }
+    function createLogoItems() {
+      const fragment = document.createDocumentFragment();
+      logos.forEach(logo => {
+        const div = document.createElement("div");
+        div.className = "carousel-item";
+        div.innerHTML = `<img src="${logo.src}" alt="${logo.name}" /><div>${logo.name}</div>`;
+        fragment.appendChild(div);
+      });
+      return fragment;
+    }
 
-  // Duplicate logos for infinite scroll
-  track.appendChild(generateLogoSet());
-  track.appendChild(generateLogoSet());
-</script>
+    // Duplicate logo items to create infinite effect
+    track.appendChild(createLogoItems());
+    track.appendChild(createLogoItems());
+  </script>
 
 </body>
 </html>

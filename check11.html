@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply Online</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        .breadcrumb {
+            background-color: #4c1c3a;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-title {
+            background: white;
+            padding: 20px 0 10px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            border-bottom: 2px solid #4c1c3a;
+        }
+
+        .form-section {
+            max-width: 1000px;
+            background: #fcf6f0;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .required-note {
+            text-align: right;
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .required {
+            color: red;
+        }
+        input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+        input[type="date"] {
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .form-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="breadcrumb">
+        <span>🏠</span> / <a href="#">Apply Online</a>
+    </div>
+
+    <div class="form-title">Apply Online</div>
+
+    <div class="form-section">
+        <div class="required-note">
+            Note: <span class="required">*</span> Required Fields
+        </div>
+
+        <form>
+            <div class="form-grid">
+                <!-- Applied For -->
+                <div>
+                    <label>Applied For <span class="required">*</span></label>
+                    <select>
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <!-- Center -->
+                <div>
+                    <label>Choice of Examination Center <span class="required">*</span></label>
+                    <select>
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <!-- Name -->
+                <div>
+                    <label>Name <span class="required">*</span></label>
+                    <input type="text" placeholder="Enter your name" />
+                </div>
+
+                <!-- DOB -->
+                <div>
+                    <label>Date of Birth <span class="required">*</span></label>
+                    <input type="text" placeholder="dd-mm-yyyy" />
+                </div>
+
+                <!-- Father's Name -->
+                <div>
+                    <label>Father's Name <span class="required">*</span></label>
+                    <input type="text" />
+                </div>
+                <div>
+                    <label for="gender">Gender <span style="color: red;">*</span></label>
+                    <div style="margin-top: 5px;">
+                      <label style="margin-right: 15px;">
+                        <input type="radio" name="gender" value="Male" required /> Male
+                      </label>
+                      <label>
+                        <input type="radio" name="gender" value="Female" required /> Female
+                      </label>
+                    </div>
+                  </div>
+                  
+
+ 
+              
+
+              
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
